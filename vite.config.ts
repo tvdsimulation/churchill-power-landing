@@ -1,10 +1,14 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
+// Для custom domain (www.churchillpower.ca) base ДОЛЖЕН быть '/'
+// Если позже захочешь тестировать по пути репозитория, можно временно
+// указать base: '/churchill-power-landing/'.
 export default defineConfig(({ mode }) => ({
+  base: "/", // <<< ключевая строка для работы на домене
   server: {
     host: "::",
     port: 8080,
@@ -14,5 +18,9 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: true,
   },
 }));
